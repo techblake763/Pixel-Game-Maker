@@ -1,4 +1,4 @@
-var array =[
+var array = [[
   '                                                                                                                                                                                       ',
   '                                                                                                                                                                                       ',
   '                                                                                                                                                                                       ',
@@ -6,20 +6,22 @@ var array =[
   '                                                                                                                                                                                       ',
   '                                                                                                                                                                                       ',
   '                                                                                                                                                                                       ',
-  '                                                                                                                                                                                @      ',
-  '                                                                                                                                                                        XX      X      ',
-  '          ?                                                                                                                                                            XXX      X      ',
-  '                                                               XXXXXXXXXXX   XXX?              ?            XXX  X??X                                                 XXXX      X      ',
-  '                                                                                                                                                                     XXXXX      X      ',
-  '                                                                                                                          X  X          XX  X                       XXXXXX      X      ',
-  '   ?    X?X?X         XX       XX        XX                 X?X                 ?     X?    ?  ?  ?       X       XX     XX  XX        XXX  XX         XX?X        XXXXXXX      X      ',
-  '               XX     XX       XX        XX                                                                             XXX  XXX      XXXX  XXX     XX         XX XXXXXXXX      X      ',
-  'P        &     XX     XX     & XX &    & XX                                             &&   &     &&          && &&   XXXX  XXXX    XXXXX  XXXX    XX &   &   XXXXXXXXXXX@@@@@@X      ',
-  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  bbbbbbbbbbbbbbbbb  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbMMbbbbbbbbbbbbb  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb##bbbbbbbbbbbbbbbbb##bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb##bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-  'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                                                                                                                                                                                       ',
+  '                          b                                                                                                                                                            ',
+  '                          b         b                                                                                                                                                  ',
+  'P                         b    b b %                                                                                                                                                   ',
+  '____________ _________b_bMbAAA b b % b                                                                                                                                                 ',
+  '##b##bbb##bb##bb##b##b##bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
   'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
 ];
+
 var leveler = [
   array
 ];
