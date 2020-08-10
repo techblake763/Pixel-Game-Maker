@@ -2,7 +2,7 @@
  * Alpha.
  * Code for mario maker
  */
-var playerSize = [22, 22];
+var playerSize = [30, 30];
 var pJumpHeight = 8;
 var playerColor;
 var grid = 32;
@@ -10,11 +10,11 @@ var score = 0;
 var width, height;
 var level = 0;
 
-if(!localStorage.getItem("level")){
-  localStorage.setItem("level",0);
+if (!localStorage.getItem("level")) {
+  localStorage.setItem("level", 0);
 }
-if(!localStorage.getItem("score")){
-  localStorage.setItem("score",0);
+if (!localStorage.getItem("score")) {
+  localStorage.setItem("score", 0);
 }
 level = parseInt(localStorage.getItem("level"));
 score = parseInt(localStorage.getItem("score"));
@@ -35,8 +35,8 @@ function setup() {
   canvas.class("game")
   width = windowWidth, height = windowHeight;
   textAlign(RIGHT);
-  level_h = windowWidth*1234e+5;
-  level_w = windowHeight*1234e+5;
+  level_h = windowWidth * 1234e+5;
+  level_w = windowHeight * 1234e+5;
   var options = {
     preventDefault: true
   };
@@ -130,12 +130,12 @@ var Camera1 = function (x, y) {
     this.y = plyer.y;
     this.x = constrain(this.x, this.w / 2, level_w - this.w / 2);
     this.y = constrain(this.y, this.h / 2, level_h - this.h / 2);
-    translate(width/2 - this.x, height/2 - this.y);
+    translate(width / 2 - this.x, height / 2 - this.y);
   };
 };
 var view = function (obj) {
-  return obj.x + width/2 - cam.x < width && obj.x + width/2 - cam.x > -obj.w &&
-    obj.y + height/2 - cam.y < height && obj.y + height/2 - cam.y > -obj.h;
+  return obj.x + width / 2 - cam.x < width && obj.x + width / 2 - cam.x > -obj.w &&
+    obj.y + height / 2 - cam.y < height && obj.y + height / 2 - cam.y > -obj.h;
 };
 var collide = function (obj1, obj2) {
   return obj1.x < obj2.x + obj2.w && obj1.x + obj1.w > obj2.x &&
@@ -148,14 +148,14 @@ var Player = function (x, y, w, h) {
   this.y = y;
   this.w = w;
   this.h = h;
-  this.speed = 0.5;
+  this.speed = 3.0;
   this.yvel = 0;
   this.xvel = 0;
   this.gravity = 0.3;
   this.JH = pJumpHeight;
   this.falling = false;
-  this.speedLimit = 5;
-  this.mxvel = 0;
+  this.speedLimit = 10;
+  this.mxvel =-1;
   this.fallLimit = 8;
   this.health = 100;
   this.dir = 0;
@@ -209,10 +209,10 @@ var Player = function (x, y, w, h) {
     if (this.health <= 0) {
       this.dead = true;
       score = 0;
-      localStorage.setItem("score",score);
+      localStorage.setItem("score", score);
     }
     if (this.dead) {
-      this.deadTimer+=10;
+      this.deadTimer += 10;
     }
     if (this.xvel < 0) {
       fill(255, 0, 0);
@@ -272,7 +272,7 @@ var Player = function (x, y, w, h) {
     fill(0);
     textAlign(CENTER, CENTER);
     text("Health " + max(0, round(this.health)) + "%", 70, 20 + 15 / 2);
-    text("Score "+score, 70, 35 + 15/2);
+    text("Score " + score, 70, 35 + 15 / 2);
     this.health = constrain(this.health, 0, 100);
   };
 };
@@ -292,49 +292,49 @@ var Block = function (x, y, w, h, type, i) {
   this.draw = function () {
     if (view(this)) {
       switch (this.type) {
-      case "solid":
-        noStroke();
-        fill(122, 90, 0);
-        rect(this.x, this.y, this.w, this.h);
-        fill(31, 232, 0);
-        rect(this.x, this.y, this.w, this.h-25);
-        break;
-      case "brick":
-        noStroke();
-        fill(166, 72, 0);
-        rect(this.x, this.y, this.w, this.h);
-        strokeWeight(2);
-        stroke(255, 206, 168);
-        fill(255, 206, 168);
-        rect(this.x+1, this.y+1, this.w-20, this.h-20);
-        fill(235, 178, 134);
-        stroke(235, 178, 134);
-        rect(this.x+18, this.y+18, this.w-19, this.h-19);
-        fill(235, 215, 136);
-        stroke(235, 215, 136);
-        rect(this.x+24, this.y+1, this.w-25, this.h-25);
-        fill(255, 168, 61);
-        stroke(255, 168, 61);
-        rect(this.x+1, this.y+24, this.w-25, this.h-25);
-        break;
-      case "ice":
-        strokeWeight(2);
-        stroke(255, 255, 255, this.op);
-        fill(150, 207, 245, this.op);
-        rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
-        break;
-      case "shortice":
-        strokeWeight(2);
-        stroke(255, 255, 255, this.op);
-        fill(150, 207, 245, this.op);
-        rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
-        break;
-      case "opened":
-        fill(163, 109, 0);
-        strokeWeight(2);
-        stroke(84, 36, 0);
-        rect(this.x+1, this.y+1, this.w-2, this.h-2);
-        break;
+        case "solid":
+          noStroke();
+          fill(122, 90, 0);
+          rect(this.x, this.y, this.w, this.h);
+          fill(31, 232, 0);
+          rect(this.x, this.y, this.w, this.h - 25);
+          break;
+        case "brick":
+          noStroke();
+          fill(166, 72, 0);
+          rect(this.x, this.y, this.w, this.h);
+          strokeWeight(2);
+          stroke(255, 206, 168);
+          fill(255, 206, 168);
+          rect(this.x + 1, this.y + 1, this.w - 20, this.h - 20);
+          fill(235, 178, 134);
+          stroke(235, 178, 134);
+          rect(this.x + 18, this.y + 18, this.w - 19, this.h - 19);
+          fill(235, 215, 136);
+          stroke(235, 215, 136);
+          rect(this.x + 24, this.y + 1, this.w - 25, this.h - 25);
+          fill(255, 168, 61);
+          stroke(255, 168, 61);
+          rect(this.x + 1, this.y + 24, this.w - 25, this.h - 25);
+          break;
+        case "ice":
+          strokeWeight(2);
+          stroke(255, 255, 255, this.op);
+          fill(150, 207, 245, this.op);
+          rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
+          break;
+        case "shortice":
+          strokeWeight(2);
+          stroke(255, 255, 255, this.op);
+          fill(150, 207, 245, this.op);
+          rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
+          break;
+        case "opened":
+          fill(163, 109, 0);
+          strokeWeight(2);
+          stroke(84, 36, 0);
+          rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
+          break;
       }
     }
   };
@@ -417,7 +417,7 @@ var Coin = function (x, y, radius, i) {
   this.update = function () {
     if (collide(this, player)) {
       score++;
-      localStorage.setItem("score",score);
+      localStorage.setItem("score", score);
       var i = coins.indexOf(this);
       coins.splice(i, 1);
     }
@@ -447,27 +447,27 @@ var MysteryBox = function (x, y, radius, type, i) {
       fill(163, 109, 0);
       strokeWeight(2);
       stroke(84, 36, 0);
-      rect(this.x+1, this.y+1, this.w-2, this.h-2);
+      rect(this.x + 1, this.y + 1, this.w - 2, this.h - 2);
       noStroke();
       fill(255, 211, 158);
-      rect(this.x+13, this.y+4, 3, 3);
-      rect(this.x+11, this.y+4, 3, 3);
-      rect(this.x+16, this.y+4, 3, 3);
-      rect(this.x+19, this.y+7, 3, 3);
-      rect(this.x+19, this.y+10, 3, 3);
-      rect(this.x+16, this.y+13, 3, 3);
-      rect(this.x+13, this.y+16, 3, 3);
-      rect(this.x+13, this.y+22, 3, 3);
-      rect(this.x+8, this.y+7, 3, 3);
+      rect(this.x + 13, this.y + 4, 3, 3);
+      rect(this.x + 11, this.y + 4, 3, 3);
+      rect(this.x + 16, this.y + 4, 3, 3);
+      rect(this.x + 19, this.y + 7, 3, 3);
+      rect(this.x + 19, this.y + 10, 3, 3);
+      rect(this.x + 16, this.y + 13, 3, 3);
+      rect(this.x + 13, this.y + 16, 3, 3);
+      rect(this.x + 13, this.y + 22, 3, 3);
+      rect(this.x + 8, this.y + 7, 3, 3);
     }
   };
   this.update = function () {
     if (collide(this, player)) {
-      score+=3;
-      localStorage.setItem("score",score);
+      score += 3;
+      localStorage.setItem("score", score);
       var i = mboxes.indexOf(this);
       mboxes.splice(i, 1);
-      if(this.type == "norm"){  
+      if (this.type == "norm") {
         blocks.add(this.x, this.y, this.w, this.h, "opened");
         blocks.apply();
       }
@@ -537,31 +537,31 @@ var Spike = function (x, y, w, h, type, i) {
     if (view(this)) {
       fill(120);
       noStroke();
-      switch(this.type){
+      switch (this.type) {
         case "up":
           triangle(this.x + this.w / 2, this.y, this.x, this.y + this.h, this.x + this.w, this.y + this.h);
-        break;
+          break;
         case "down":
           triangle(this.x + this.w / 2, this.y + this.h, this.x, this.y, this.x + this.w, this.y);
-        break;
+          break;
         case "left":
           triangle(this.x, this.y + this.h / 2, this.x + this.w, this.y + this.h, this.x + this.w, this.y);
-        break;
+          break;
         case "right":
           triangle(this.x + this.w, this.y + this.h / 2, this.x, this.y + this.h, this.x, this.y);
-        break;
+          break;
       }
     }
   };
   this.update = function () {
     var pcoord = [
-      {x: player.x, y: player.y},
-      {x: player.x + player.w, y: player.y},
-      {x: player.x + player.w, y: player.y + player.h},
-      {x: player.x, y: player.y + player.h}
+      { x: player.x, y: player.y },
+      { x: player.x + player.w, y: player.y },
+      { x: player.x + player.w, y: player.y + player.h },
+      { x: player.x, y: player.y + player.h }
     ];
-    function tatriangle(a,b,c,d,e,f){
-      return [{x: a, y: b}, {x: c, y: d}, {x: e, y: f}]
+    function tatriangle(a, b, c, d, e, f) {
+      return [{ x: a, y: b }, { x: c, y: d }, { x: e, y: f }]
     }
     var tup = tatriangle(this.x + this.w / 2, this.y, this.x, this.y + this.h, this.x + this.w, this.y + this.h);
     var tdown = tatriangle(this.x + this.w / 2, this.y + this.h, this.x, this.y, this.x + this.w, this.y);
@@ -574,8 +574,8 @@ var Spike = function (x, y, w, h, type, i) {
       right: polygonCollide(pcoord, tright)
     };
     var this_true = cols[this.type];
-    if(this_true){
-      switch(this.type){
+    if (this_true) {
+      switch (this.type) {
         case "up":
           player.yvel = -player.JH;
           break;
@@ -727,7 +727,7 @@ var Monster = function (x, y, w, h) {
   this.h = h;
   this.dead = false; // is the monster "dead"?
   this.xvel = 1; // monster's speed
-  this.angle=0; // the monster's eye's angle
+  this.angle = 0; // the monster's eye's angle
   this.draw = function () {
     if (!this.dead) {
       // Draw the monster
@@ -737,7 +737,7 @@ var Monster = function (x, y, w, h) {
   };
   this.update = function () {
     if (!this.dead) {
-      this.angle = Math.atan2(this.x-player.x,player.y-this.y);//make the angle point to the player
+      this.angle = Math.atan2(this.x - player.x, player.y - this.y);//make the angle point to the player
       this.x += this.xvel;
       for (var i = 0; i < blocks.length; i++) {
         if (collide(this, blocks[i])) {
@@ -750,7 +750,7 @@ var Monster = function (x, y, w, h) {
           redTrans = 80;
         } else if (player.yvel > 0 && player.falling) {
           score += 2;
-          localStorage.setItem("score",score);
+          localStorage.setItem("score", score);
           this.dead = true; // the monster is "dead"
           player.yvel = -player.JH; // make the player hop 
         }
@@ -788,60 +788,60 @@ var updateMap = function () {
     var cells = leveler[level][col];
     for (var row = 0; row < cells.length; row++) {
       switch (cells[row]) {
-      case "b":
-        blocks.add(row * grid, col * grid, grid, grid, "solid");
-      break;
-      case "@":
-        portals.add(row * grid, col * grid, grid);
-      break;
-      case "_":
-        blocks.add(row * grid, col * grid + (grid / 3) * 2, grid * 2, grid / 3, "ice");
-      break;
-      case "X":
-        blocks.add(row * grid, col * grid, grid, grid, "brick");
-      break;
-      case "-":
-        blocks.add(row * grid, col * grid, grid, grid, "shortice");
-      break;
-      case "#":
-        lava.add(row * grid, col * grid, grid, "lava");
-      break;
-      case "E":
-        lava.add(row * grid, col * grid, grid, "acid");
-      break;
-      case "?":
-        mboxes.add(row * grid, col * grid, grid, "norm");
-      break;
-      case "C":
-        mboxes.add(row * grid, col * grid, grid, "not");
-      break;
-      case "P":
-        player = new Player(row * grid - (player.w - grid) / 2, col * grid - (player.h - grid) / 2, playerSize[0], playerSize[1]);
-      break;
-      case "A":
-        spikes.add(row * grid, col * grid, grid, grid, "up");
-      break;
-      case "V":
-        spikes.add(row * grid, col * grid, grid, grid, "down");
-      break;
-      case "<":
-        spikes.add(row * grid, col * grid, grid, grid, "left");
-      break;
-      case ">":
-        spikes.add(row * grid, col * grid, grid, grid, "right");
-      break;
-      case "M":
-        jumpBlocks.add(row * grid, col * grid + grid * 2 / 3, grid, grid / 3);
-      break;
-      case "%":
-        cannons.add(row * grid, col * grid, grid);
-      break;
-      case "&":
-        monsters.add(row * grid, col * grid, grid, grid);
-      break;
-      case "O":
-        coins.add(row * grid, col * grid, grid, grid);
-      break;
+        case "b":
+          blocks.add(row * grid, col * grid, grid, grid, "solid");
+          break;
+        case "@":
+          portals.add(row * grid, col * grid, grid);
+          break;
+        case "_":
+          blocks.add(row * grid, col * grid + (grid / 3) * 2, grid * 2, grid / 3, "ice");
+          break;
+        case "X":
+          blocks.add(row * grid, col * grid, grid, grid, "brick");
+          break;
+        case "-":
+          blocks.add(row * grid, col * grid, grid, grid, "shortice");
+          break;
+        case "#":
+          lava.add(row * grid, col * grid, grid, "lava");
+          break;
+        case "E":
+          lava.add(row * grid, col * grid, grid, "acid");
+          break;
+        case "?":
+          mboxes.add(row * grid, col * grid, grid, "norm");
+          break;
+        case "C":
+          mboxes.add(row * grid, col * grid, grid, "not");
+          break;
+        case "P":
+          player = new Player(row * grid - (player.w - grid) / 2, col * grid - (player.h - grid) / 2, playerSize[0], playerSize[1]);
+          break;
+        case "A":
+          spikes.add(row * grid, col * grid, grid, grid, "up");
+          break;
+        case "V":
+          spikes.add(row * grid, col * grid, grid, grid, "down");
+          break;
+        case "<":
+          spikes.add(row * grid, col * grid, grid, grid, "left");
+          break;
+        case ">":
+          spikes.add(row * grid, col * grid, grid, grid, "right");
+          break;
+        case "M":
+          jumpBlocks.add(row * grid, col * grid + grid * 2 / 3, grid, grid / 3);
+          break;
+        case "%":
+          cannons.add(row * grid, col * grid, grid);
+          break;
+        case "&":
+          monsters.add(row * grid, col * grid, grid, grid);
+          break;
+        case "O":
+          coins.add(row * grid, col * grid, grid, grid);
+          break;
       }
       level_w = leveler[level][col].length * grid;
       level_h = leveler[level].length * grid;
@@ -853,7 +853,7 @@ var resetCam = function () {
   cam.y = player.y;
 }; //reset the cam to the player's location.
 
-function drawbg(){
+function drawbg() {
   background(120, 210, 255);
 }
 
@@ -882,7 +882,7 @@ updateMap();
 var cam = new Camera1(player.x, player.y);
 var draw = function () {
   drawbg();
-  switch(scene){
+  switch (scene) {
     case "home":
       noStroke();
       push();
@@ -905,33 +905,33 @@ var draw = function () {
         transparence = constrain(transparence, 0, 255);
         redTrans = constrain(redTrans, 0, 255);
       }
-    break;
+      break;
   }
 };
 function swiped(event) {
   if (event.direction == 4) {//right
-    if(player.mxvel < 5){
-      if(player.mxvel < 0){
+    if (player.mxvel < 5) {
+      if (player.mxvel < 0) {
         player.mxvel = 0;
       }
       player.mxvel += 1;
     }
   } else if (event.direction == 8) {//up
-    if(!player.falling){
+    if (!player.falling) {
       player.yvel = -pJumpHeight;
     }
   } else if (event.direction == 2) {//left
-    if(player.mxvel > -5){
-      if(player.mxvel > 0){
+    if (player.mxvel > -5) {
+      if (player.mxvel > 0) {
         player.mxvel = 0;
       }
       player.mxvel += -1;
     }
-  }else if (event.direction == 16) {//down
+  } else if (event.direction == 16) {//down
     player.mxvel = 0;
   }
 }
-function change(level){
+function change(level) {
   leveler = level;
   updateMap();
   resetCam();
